@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVOSCloudIM
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        AVOSCloud.setApplicationId("B8fFHFncAk7PzvF6FaguYUSX-gzGzoHsz", clientKey: "lWmgmXtFBraFgm6KYuLqLAiX")
+        AVAnalytics.trackAppOpened(launchOptions: launchOptions)
+        
+        let testObject = AVObject(className: "TestObject")
+//        testObject.setObject("bar", forKey: "foo")
+        testObject["foo"] = "bar2"
+        testObject.save()
+        
+        
         return true
     }
 
