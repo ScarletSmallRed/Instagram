@@ -43,16 +43,35 @@ class SignUpVC: UIViewController {
 
         scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         scrollView.contentSize.height = self.view.frame.height
+        scrollViewHeight = self.view.frame.height
         
         //Detects the status of the keyboard that appears or disappears
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let hideTap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardTap(_:)))
+        hideTap.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(hideTap)
     }
     
     func showKeyboard(_ notification: Notification) {
+        let rect = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        keyboard = rect.cgRectValue
         
+        UIView.animate(withDuration: 0.4) { 
+            self.scrollView.frame.size.height = self.scrollViewHeight - self.keyboard.size.height
+        }
     }
     
     func hideKeyboard(_ notification: Notification) {
-        
+        UIView.animate(withDuration: 0.4) { 
+            self.scrollView.frame.size.height = self.view.frame.height
+        }
+    }
+    
+    func hideKeyboardTap(_ reconizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
