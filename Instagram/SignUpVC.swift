@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpVC: UIViewController {
+class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Image view
     @IBOutlet weak var avaImg: UIImageView!
     
@@ -38,6 +38,10 @@ class SignUpVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func signUpBtnClicked(_ sender: UIButton) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +57,13 @@ class SignUpVC: UIViewController {
         hideTap.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(hideTap)
+        
+        let imgTap = UITapGestureRecognizer(target: self, action: #selector(loadImg(_:)))
+        imgTap.numberOfTapsRequired = 1
+        avaImg.isUserInteractionEnabled = true
+        avaImg.addGestureRecognizer(imgTap)
+        avaImg.layer.cornerRadius = avaImg.frame.width / 2
+        avaImg.clipsToBounds = true
     }
     
     func showKeyboard(_ notification: Notification) {
@@ -72,6 +83,19 @@ class SignUpVC: UIViewController {
     
     func hideKeyboardTap(_ reconizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    func loadImg(_ recognizer: UITapGestureRecognizer) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        avaImg.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

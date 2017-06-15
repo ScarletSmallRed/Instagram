@@ -41,5 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Instagram needs to use the Media Library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Instagram needs to use the Photo Library</string>
 </dict>
 </plist>
