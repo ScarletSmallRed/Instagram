@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVOSCloudIM
 
 class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //Image view
@@ -40,6 +41,37 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     @IBAction func signUpBtnClicked(_ sender: UIButton) {
         self.view.endEditing(true)
+        
+        if passwordTxt.text != repeatPasswordTxt.text {
+            let alert = UIAlertController(title: "Attention", message: "The password entered twice is inconsistent", preferredStyle: .alert)
+            let OK = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(OK)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        //Send registration data to the server
+        let user = AVUser()
+        user.username = userNameTxt.text!.lowercased()
+        user.email = eMailTxt.text!.lowercased()
+        user.password = passwordTxt.text!
+        
+        user["fullName"] = fullNameTxt.text!.lowercased()
+        user["bio"] = bioTxt.text!
+        user["web"] = webTxt.text!
+        user["gender"] = ""
+        
+        //Convert avatar data and send it to the server
+        let avaData = UIImageJPEGRepresentation(avaImg.image!, 0.5)
+        let avaFile = AVFile(name: "ava.jpg", data: avaData!)
+        user["ava"] = avaFile
+        
+        user.signUpInBackground { (success, error) in
+            if success {
+                print("User registration is successful!")
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -83,6 +115,21 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     
     func hideKeyboardTap(_ reconizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
+        
+        if userNameTxt.text!.isEmpty
+        || passwordTxt.text!.isEmpty
+        || repeatPasswordTxt.text!.isEmpty
+        || eMailTxt.text!.isEmpty
+        || fullNameTxt.text!.isEmpty
+        || bioTxt.text!.isEmpty
+        || webTxt.text!.isEmpty {
+            let alert = UIAlertController(title: "Attention", message: "Please fill in all fields.", preferredStyle: .alert)
+            let OK = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(OK)
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
     }
     
     func loadImg(_ recognizer: UITapGestureRecognizer) {
