@@ -68,6 +68,12 @@ class SignUpVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         user.signUpInBackground { (success, error) in
             if success {
                 print("User registration is successful!")
+                
+                UserDefaults.standard.set(user.username, forKey: "userName")
+                UserDefaults.standard.synchronize()
+                
+                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.login()
             } else {
                 print(error?.localizedDescription)
             }

@@ -40,6 +40,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Forget password?"/>
+                                <connections>
+                                    <segue destination="fyo-H0-lFh" kind="presentation" id="hrP-gy-Ey9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDD-hv-lzc">
                                 <rect key="frame" x="50" y="318" width="90" height="30"/>
@@ -47,6 +50,9 @@
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign in"/>
+                                <connections>
+                                    <action selector="signInBtnClicked:" destination="pGc-cc-RCW" eventType="touchUpInside" id="P0N-gL-Xof"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1o-fR-yFp">
                                 <rect key="frame" x="235" y="318" width="90" height="30"/>
@@ -183,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmE-uq-fKK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="540" y="141.67916041979012"/>
+            <point key="canvasLocation" x="1047" y="142"/>
         </scene>
         <!--Reset PasswordVC-->
         <scene sceneID="T1v-xQ-Xog">
@@ -196,12 +202,82 @@
                     <view key="view" contentMode="scaleToFill" id="jSk-tm-vbP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N3A-Qt-gLm">
+                                <rect key="frame" x="16" y="142" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbh-BS-nLO">
+                                <rect key="frame" x="16" y="195" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.38431372549999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetBtnClicked:" destination="fyo-H0-lFh" eventType="touchUpInside" id="Oum-We-MO2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yuo-lb-BPH">
+                                <rect key="frame" x="269" y="195" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelBtnClicked:" destination="fyo-H0-lFh" eventType="touchUpInside" id="7fs-Ch-t6f"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="cancelBtn" destination="Yuo-lb-BPH" id="ut7-ae-pPP"/>
+                        <outlet property="eMailTxt" destination="N3A-Qt-gLm" id="4HA-1S-zsS"/>
+                        <outlet property="resetBtn" destination="nbh-BS-nLO" id="24d-C9-fTx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6br-ei-ej7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="142"/>
+            <point key="canvasLocation" x="-287.19999999999999" y="982.75862068965523"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="A7I-RV-Kuo">
+            <objects>
+                <viewController id="ZMm-XZ-gxZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ghn-hT-OC6"/>
+                        <viewControllerLayoutGuide type="bottom" id="x2f-rc-3qo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a4R-uF-xFw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="PLl-fB-dXd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lg5-Gt-lt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1398" y="983"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="WpY-9r-VNN">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBar" id="uVb-tX-PuP" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Krs-UG-CId">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZMm-XZ-gxZ" kind="relationship" relationship="viewControllers" id="roR-e7-11g"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kLX-Jf-kuD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="540" y="983"/>
         </scene>
     </scenes>
     <resources>

@@ -7,9 +7,43 @@
 //
 
 import UIKit
+import AVOSCloudIM
 
 class ResetPasswordVC: UIViewController {
+    @IBOutlet weak var eMailTxt: UITextField!
+    @IBOutlet weak var resetBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
 
+    @IBAction func resetBtnClicked(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
+        if eMailTxt.text!.isEmpty {
+            let alert = UIAlertController(title: "Attention", message: "E-mail cannot be empty", preferredStyle: .alert)
+            let OK = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(OK)
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
+        AVUser.requestPasswordResetForEmail(inBackground: eMailTxt.text!) { (success, error) in
+            if success {
+                let alert = UIAlertController(title: "Attention", message: "The reset password link has been sent to your e-mail address", preferredStyle: .alert)
+                let OK = UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                alert.addAction(OK)
+                self.present(alert, animated: true, completion: nil)
+            }else {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    @IBAction func cancelBtnClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

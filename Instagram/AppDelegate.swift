@@ -26,9 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         testObject["foo"] = "bar2"
         testObject.save()
         
+        login()
         
         return true
     }
+    
+    func login() {
+        let userName: String? = UserDefaults.standard.string(forKey: "userName")
+        
+        if userName != nil {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let myTabBar = storyboard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
+            window?.rootViewController = myTabBar
+        }
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
